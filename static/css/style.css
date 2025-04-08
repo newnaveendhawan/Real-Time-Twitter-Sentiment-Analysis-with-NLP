@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+}
+input[type="text"] {
+    padding: 10px;
+    width: 70%;
+    margin-bottom: 20px;
+}
+button {
+    padding: 10px 20px;
+    margin: 5px;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    margin: 10px 0;
+}
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+.dark-mode input,
+.dark-mode button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+}
+.dark-mode li {
+    color: #ccc;
+}
