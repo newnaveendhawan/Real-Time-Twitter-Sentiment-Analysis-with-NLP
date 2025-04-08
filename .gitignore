@@ -1,0 +1,31 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+*.egg-info/
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Twscrape or other cached data folders (optional)
+.twscrape/
+accounts/
