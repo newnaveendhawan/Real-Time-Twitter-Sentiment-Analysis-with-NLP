@@ -59,7 +59,7 @@ This app fetches the latest tweets of a user and determines whether each tweet i
 This project is licensed under the [MIT License](https://github.com/newnaveendhawan/Real-Time-Twitter-Sentiment-Analysis-with-NLP/blob/main/LICENSE). See the LICENSE file for details.
 
 ## 👨‍💻 About the Author
-#### Naveen Dhawan
+### Naveen Dhawan
 ##### 🎓 B.Tech – NIT Warangal
 ##### 💼 Data Analyst | Data Science | Dashboard Creator
 ##### 💡 Passionate about turning raw data into meaningful insights
