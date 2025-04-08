@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Twitter Sentiment Analysis</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      color: #222;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      width: 100%;
+      max-width: 700px;
+      text-align: center;
+    }
+    .title {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .input {
+      width: 70%;
+      padding: 10px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .btn {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .toggle-dark {
+      margin-top: 20px;
+      background-color: #444;
+      color: white;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .tweet-list {
+      list-style: none;
+      padding: 0;
+    }
+    .tweet-item {
+      margin: 15px 0;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #f7f7f7;
+      text-align: left;
+    }
+    .tweet-item.positive { border-left: 6px solid green; }
+    .tweet-item.negative { border-left: 6px solid red; }
+    .tweet-item.neutral { border-left: 6px solid gray; }
+
+    .dark-mode {
+      background-color: #1c1c1c;
+      color: #e6e6e6;
+    }
+    .dark-mode .container {
+      background-color: #2a2a2a;
+    }
+    .dark-mode .input,
+    .dark-mode .btn,
+    .dark-mode .toggle-dark {
+      background-color: #3a3a3a;
+      color: white;
+      border: 1px solid #555;
+    }
+    .dark-mode .tweet-item {
+      background-color: #333;
+    }
+    .dark-mode .summary-box {
+      background-color: #2e3b55;
+      color: #e6e6e6;
+    }
+    .error {
+      color: red;
+      margin-top: 15px;
+    }
+    .summary-box {
+      text-align: left;
+      margin-top: 25px;
+      background: #e9f1ff;
+      padding: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <h1 class="title">Twitter Sentiment Analysis</h1>
+      <form method="POST">
+        <input type="text" name="username" class="input" placeholder="Enter Twitter Username" required>
+        <button type="submit" class="btn">Analyze</button>
+      </form>
+
+      <button id="modeToggle" class="toggle-dark" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
+
+      {% if tweets %}
+        <div class="summary-box">
+          <h3>Sentiment Summary ({{ total }} Tweets)</h3>
+          <p>✅ Positive: {{ summary['Positive'] }}%</p>
+          <p>❌ Negative: {{ summary['Negative'] }}%</p>
+          <p>⚪ Neutral: {{ summary['Neutral'] }}%</p>
+        </div>
+
+        <ul class="tweet-list">
+          {% for tweet, sentiment, date in tweets %}
+          <li class="tweet-item {{ sentiment[0]|lower }}">
+            <p><strong>Date:</strong> {{ date }}</p>
+            <p>{{ tweet }}</p>
+            <p><strong>Sentiment:</strong>
+              {% if sentiment[1] < 0 %}
+              ❌ <span style="color:red;">Negative {{ '%.4f' % sentiment[1] }}</span>
+              {% elif sentiment[1] > 0 %}
+              ✅ <span style="color:green;">Positive {{ '%.4f' % sentiment[1] }}</span>
+              {% else %}
+              ⚪ <span style="color:gray;">Neutral {{ '%.4f' % sentiment[1] }}</span>
+              {% endif %}
+            </p>
+          </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      const body = document.body;
+      const toggleBtn = document.getElementById("modeToggle");
+      body.classList.toggle('dark-mode');
+      toggleBtn.textContent = body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+    }
+  </script>
+</body>
+</html>
